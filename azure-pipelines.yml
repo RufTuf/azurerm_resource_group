@@ -1,0 +1,36 @@
+trigger:
+- main
+
+pool: default
+
+stages:
+  - stage: terraforminstalattion
+    displayName: terraform instalattion
+    jobs:
+      - job: tfinstall
+        steps:
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+  - stage: 
+    displayName: terraform init
+    jobs:
+      - job: terraforminit
+        steps:
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            backendServiceArm: 'hclsc'
+            backendAzureRmStorageAccountName: 'hclvm'
+            backendAzureRmContainerName: 'hclcon'
+            backendAzureRmKey: 'hcl.statefile'
+  - stage:
+    displayName: terraformvalidate
+    jobs:
+      - job: terraformvalidate
+        steps:
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
