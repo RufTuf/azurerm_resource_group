@@ -4,8 +4,6 @@ trigger:
 pool: Default
 
 stages:
-
-# Stage 1 - Install Terraform
 - stage: InstallTerraform
   displayName: Install Terraform
   jobs:
@@ -15,7 +13,6 @@ stages:
       inputs:
         terraformVersion: 'latest'
 
-# Stage 2 - Terraform Init
 - stage: TerraformInit
   displayName: Terraform Init
   jobs:
@@ -30,7 +27,6 @@ stages:
         backendAzureRmContainerName: 'hclcontainer'
         backendAzureRmKey: 'hcl.statefile'
 
-# Stage 3 - Terraform Validate
 - stage: TerraformValidate
   displayName: Terraform Validate
   jobs:
